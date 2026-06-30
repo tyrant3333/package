@@ -13,20 +13,10 @@
     ::-webkit-scrollbar-thumb { background: #7c5cfc; border-radius: 10px; }
     
     #telegramBanner {
-      display: none;
-      background: linear-gradient(135deg, #0088cc, #24a1de);
-      color: white;
-      padding: 12px 20px;
-      text-align: center;
-      position: relative;
-      z-index: 200;
-      font-size: 15px;
-      font-weight: 500;
-      box-shadow: 0 4px 20px rgba(0,136,204,0.4);
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      display: none; background: linear-gradient(135deg, #0088cc, #24a1de); color: white;
+      padding: 12px 20px; text-align: center; position: relative; z-index: 200; font-size: 15px;
+      font-weight: 500; box-shadow: 0 4px 20px rgba(0,136,204,0.4); align-items: center;
+      justify-content: center; gap: 12px; flex-wrap: wrap;
     }
     #telegramBanner a { color: #fff; font-weight: 700; text-decoration: underline; margin: 0 4px; }
     #telegramBanner .close-banner {
@@ -34,16 +24,11 @@
       padding: 2px 10px; border-radius: 20px; transition: 0.2s; position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
     }
     #telegramBanner .close-banner:hover { background: rgba(255,255,255,0.4); }
-    @media (max-width: 600px) {
-      #telegramBanner { font-size: 14px; padding: 10px 16px; }
-      #telegramBanner .close-banner { right: 8px; }
-    }
+    @media (max-width: 600px) { #telegramBanner { font-size: 14px; padding: 10px 16px; } #telegramBanner .close-banner { right: 8px; } }
 
     header { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: rgba(13,13,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 100; }
     .logo { font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
     .logo i { color: #7c5cfc; }
-    /* Admin button aur Count badge ko hata diya gaya hai as per request */
-    .header-actions { display: flex; gap: 16px; align-items: center; }
     
     .hero { padding: 40px 40px 20px; max-width: 1440px; margin: 0 auto; }
     .hero .featured { background: linear-gradient(145deg, #18182e, #25254a); border-radius: 24px; padding: 30px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 20px 60px rgba(0,0,0,0.6); overflow: hidden; }
@@ -92,9 +77,6 @@
 
 <header>
   <div class="logo"><i class="fas fa-play-circle"></i> DESI SHIT</div>
-  <div class="header-actions">
-    <!-- Admin button aur count badge yahan se hata diya gaya hai -->
-  </div>
 </header>
 
 <section class="hero" id="heroSection"></section>
@@ -137,18 +119,10 @@
             }
           }
           const dismissed = localStorage.getItem('telegram_banner_dismissed');
-          if (config.permanentNotification) {
+          if (config.permanentNotification || dismissed !== 'true') {
             banner.style.display = 'flex';
-          } else {
-            if (dismissed !== 'true') {
-              banner.style.display = 'flex';
-            } else {
-              banner.style.display = 'none';
-            }
-          }
-        } else {
-          banner.style.display = 'none';
-        }
+          } else { banner.style.display = 'none'; }
+        } else { banner.style.display = 'none'; }
       } catch (e) { console.warn('Config load error', e); }
     }
 
