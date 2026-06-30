@@ -42,10 +42,9 @@
     header { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: rgba(13,13,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 100; }
     .logo { font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
     .logo i { color: #7c5cfc; }
+    /* Admin button aur Count badge ko hata diya gaya hai as per request */
     .header-actions { display: flex; gap: 16px; align-items: center; }
-    .admin-btn { background: linear-gradient(135deg, #7c5cfc, #f57c9a); border: none; color: #fff; padding: 10px 22px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 20px rgba(124,92,252,0.3); }
-    .admin-btn:hover { transform: scale(1.04); box-shadow: 0 8px 30px rgba(124,92,252,0.5); }
-    .count-badge { background: rgba(124,92,252,0.15); padding: 6px 14px; border-radius: 20px; font-size: 14px; color: #a0a0c0; border: 1px solid rgba(255,255,255,0.06); }
+    
     .hero { padding: 40px 40px 20px; max-width: 1440px; margin: 0 auto; }
     .hero .featured { background: linear-gradient(145deg, #18182e, #25254a); border-radius: 24px; padding: 30px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 20px 60px rgba(0,0,0,0.6); overflow: hidden; }
     .hero .featured .thumb-container { flex: 1 1 300px; min-height: 220px; background: #2d2d44; border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer; }
@@ -81,7 +80,7 @@
     .toast.success { background: #00b894; color: #fff; }
     .toast.error { background: #e17055; color: #fff; }
     .toast.info { background: #7c5cfc; color: #fff; }
-    @media (max-width: 768px) { header { padding: 14px 20px; } .hero { padding: 20px 20px 10px; } .hero .featured { flex-direction: column; padding: 20px; } .hero .featured .info h2 { font-size: 22px; } .container { padding: 10px 20px 40px; } .video-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; } .admin-btn span { display: none; } }
+    @media (max-width: 768px) { header { padding: 14px 20px; } .hero { padding: 20px 20px 10px; } .hero .featured { flex-direction: column; padding: 20px; } .hero .featured .info h2 { font-size: 22px; } .container { padding: 10px 20px 40px; } .video-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; } }
   </style>
 </head>
 <body>
@@ -94,8 +93,7 @@
 <header>
   <div class="logo"><i class="fas fa-play-circle"></i> DESI SHIT</div>
   <div class="header-actions">
-    <span class="count-badge" id="videoCount"><i class="fas fa-film"></i> 0 videos</span>
-    <a href="/admin" class="admin-btn"><i class="fas fa-crown"></i> <span>Admin</span></a>
+    <!-- Admin button aur count badge yahan se hata diya gaya hai -->
   </div>
 </header>
 
@@ -113,7 +111,6 @@
     const CONFIG_API = '/api/config';
     const videoGrid = document.getElementById('videoGrid');
     const heroSection = document.getElementById('heroSection');
-    const videoCount = document.getElementById('videoCount');
     const toast = document.getElementById('toast');
     const banner = document.getElementById('telegramBanner');
     const closeBannerBtn = document.getElementById('closeBannerBtn');
@@ -182,7 +179,6 @@
         heroSection.innerHTML = `<div class="featured"><div class="empty-hero"><i class="fas fa-video"></i><h3>No videos yet</h3><p>Upload your first video from Admin Panel</p></div></div>`;
       } else {
         const latest = videos[0];
-        // Prefer telegramUrl, fallback to fileUrl
         const src = latest.telegramUrl || latest.fileUrl || '';
         heroSection.innerHTML = `
           <div class="featured">
@@ -223,7 +219,6 @@
         });
         videoGrid.innerHTML = html;
       }
-      videoCount.textContent = videos.length + ' video' + (videos.length > 1 ? 's' : '');
     }
 
     window.openVideo = function(id) {
