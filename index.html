@@ -3,228 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StreamZone | Safe & Secure</title>
+  <title>DESI SHIT - Watch Videos</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0d0d1a;
-      color: #f0f0ff;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh;
-    }
+    body { background: #0d0d1a; color: #f0f0ff; font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0d0d1a; }
     ::-webkit-scrollbar-thumb { background: #7c5cfc; border-radius: 10px; }
-
-    /* Navbar */
-    header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 40px; background: rgba(13, 13, 26, 0.92);
-      backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);
-      position: sticky; top: 0; z-index: 100;
+    
+    #telegramBanner {
+      display: none;
+      background: linear-gradient(135deg, #0088cc, #24a1de);
+      color: white;
+      padding: 12px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 200;
+      font-size: 15px;
+      font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,136,204,0.4);
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
+    #telegramBanner a { color: #fff; font-weight: 700; text-decoration: underline; margin: 0 4px; }
+    #telegramBanner .close-banner {
+      background: rgba(255,255,255,0.2); border: none; color: #fff; font-size: 18px; cursor: pointer;
+      padding: 2px 10px; border-radius: 20px; transition: 0.2s; position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    }
+    #telegramBanner .close-banner:hover { background: rgba(255,255,255,0.4); }
+    @media (max-width: 600px) {
+      #telegramBanner { font-size: 14px; padding: 10px 16px; }
+      #telegramBanner .close-banner { right: 8px; }
+    }
+
+    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: rgba(13,13,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 100; }
     .logo { font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
     .logo i { color: #7c5cfc; }
     .header-actions { display: flex; gap: 16px; align-items: center; }
-    .admin-btn {
-      background: linear-gradient(135deg, #7c5cfc, #f57c9a);
-      border: none; color: #fff; padding: 10px 22px; border-radius: 30px;
-      font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
-      transition: 0.3s; box-shadow: 0 4px 20px rgba(124,92,252,0.3);
-    }
+    .admin-btn { background: linear-gradient(135deg, #7c5cfc, #f57c9a); border: none; color: #fff; padding: 10px 22px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 20px rgba(124,92,252,0.3); }
     .admin-btn:hover { transform: scale(1.04); box-shadow: 0 8px 30px rgba(124,92,252,0.5); }
-    .count-badge {
-      background: rgba(124,92,252,0.15); padding: 6px 14px; border-radius: 20px;
-      font-size: 14px; color: #a0a0c0; border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    /* Hero */
+    .count-badge { background: rgba(124,92,252,0.15); padding: 6px 14px; border-radius: 20px; font-size: 14px; color: #a0a0c0; border: 1px solid rgba(255,255,255,0.06); }
     .hero { padding: 40px 40px 20px; max-width: 1440px; margin: 0 auto; }
-    .hero .featured {
-      background: linear-gradient(145deg, #18182e, #25254a);
-      border-radius: 24px; padding: 30px; display: flex; align-items: center;
-      gap: 40px; flex-wrap: wrap; border: 1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6); overflow: hidden;
-    }
-    .hero .featured .thumb-container {
-      flex: 1 1 300px; min-height: 220px; background: #2d2d44;
-      border-radius: 16px; display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden; cursor: pointer;
-    }
+    .hero .featured { background: linear-gradient(145deg, #18182e, #25254a); border-radius: 24px; padding: 30px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 20px 60px rgba(0,0,0,0.6); overflow: hidden; }
+    .hero .featured .thumb-container { flex: 1 1 300px; min-height: 220px; background: #2d2d44; border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer; }
     .hero .featured .thumb-container img { width: 100%; height: 100%; object-fit: cover; }
-    .hero .featured .thumb-container .play-icon {
-      position: absolute; inset: 0; background: rgba(0,0,0,0.4);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 60px; color: #fff; opacity: 0.8; transition: 0.3s;
-    }
+    .hero .featured .thumb-container .play-icon { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; font-size: 60px; color: #fff; opacity: 0.8; transition: 0.3s; }
     .hero .featured .thumb-container:hover .play-icon { opacity: 1; transform: scale(1.1); }
     .hero .featured .info { flex: 1 1 250px; }
     .hero .featured .info h2 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
     .hero .featured .info p { color: #a0a0c0; font-size: 16px; line-height: 1.6; }
-    .hero .featured .info .tag {
-      display: inline-block; margin-top: 12px; padding: 6px 16px;
-      background: rgba(124,92,252,0.2); border-radius: 20px; font-size: 13px; color: #b8a9ff;
-    }
+    .hero .featured .info .tag { display: inline-block; margin-top: 12px; padding: 6px 16px; background: rgba(124,92,252,0.2); border-radius: 20px; font-size: 13px; color: #b8a9ff; }
     .empty-hero { width: 100%; text-align: center; padding: 50px 20px; color: #a0a0c0; }
     .empty-hero i { font-size: 48px; opacity: 0.3; display: block; margin-bottom: 16px; }
-
-    /* Grid */
     .container { max-width: 1440px; margin: 0 auto; padding: 20px 40px 60px; }
     .grid-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .grid-header h2 { font-size: 24px; font-weight: 600; }
     .grid-header h2 i { color: #7c5cfc; margin-right: 10px; }
-    .video-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px;
-    }
-    .video-card {
-      background: #18182e; border-radius: 16px; overflow: hidden;
-      transition: 0.3s; cursor: pointer; border: 1px solid rgba(255,255,255,0.04);
-    }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; }
+    .video-card { background: #18182e; border-radius: 16px; overflow: hidden; transition: 0.3s; cursor: pointer; border: 1px solid rgba(255,255,255,0.04); }
     .video-card:hover { transform: translateY(-6px); background: #22223e; border-color: rgba(124,92,252,0.25); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-    .video-card .thumb {
-      width: 100%; aspect-ratio: 16/9; background: #2d2d44;
-      position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
+    .video-card .thumb { width: 100%; aspect-ratio: 16/9; background: #2d2d44; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .video-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .video-card .thumb .overlay {
-      position: absolute; inset: 0; background: rgba(0,0,0,0.3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 40px; color: #fff; opacity: 0; transition: 0.3s;
-    }
+    .video-card .thumb .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 40px; color: #fff; opacity: 0; transition: 0.3s; }
     .video-card:hover .thumb .overlay { opacity: 1; }
     .video-card .body { padding: 16px 18px; }
     .video-card .body h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
     .video-card .body .caption { color: #a0a0c0; font-size: 14px; line-height: 1.4; margin-bottom: 8px; }
-    .video-card .footer {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 13px; color: #a0a0c0; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 10px;
-    }
-    .video-card .footer .del-btn {
-      background: none; border: none; color: rgba(255,100,100,0.5); cursor: pointer;
-      transition: 0.3s; padding: 4px 8px; border-radius: 6px;
-    }
-    .video-card .footer .del-btn:hover { color: #ff6b6b; background: rgba(255,100,100,0.1); }
+    .video-card .footer { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #a0a0c0; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 10px; }
+    .video-card .footer .date { display: flex; align-items: center; gap: 6px; }
     .empty-grid { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #a0a0c0; }
     .empty-grid i { font-size: 56px; opacity: 0.15; display: block; margin-bottom: 16px; }
-
-    /* Admin Modal */
-    .admin-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px);
-      z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;
-    }
-    .admin-overlay.open { display: flex; }
-    .admin-panel {
-      background: #18182e; border-radius: 20px; max-width: 520px; width: 100%;
-      padding: 36px 32px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-      max-height: 90vh; overflow-y: auto;
-    }
-    .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
-    .panel-header h2 { font-size: 22px; font-weight: 700; }
-    .panel-header h2 i { color: #7c5cfc; margin-right: 10px; }
-    .panel-header .close-btn { background: none; border: none; color: #a0a0c0; font-size: 26px; cursor: pointer; transition: 0.3s; }
-    .panel-header .close-btn:hover { color: #fff; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 14px; color: #a0a0c0; margin-bottom: 6px; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 12px 16px; background: #0d0d1a; border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px; color: #fff; font-size: 15px; transition: 0.3s; font-family: inherit;
-    }
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none; border-color: #7c5cfc; box-shadow: 0 0 0 4px rgba(124,92,252,0.15);
-    }
-    .form-group textarea { min-height: 70px; resize: vertical; }
-    .file-upload {
-      padding: 20px; border: 2px dashed rgba(255,255,255,0.08); border-radius: 12px;
-      background: rgba(124,92,252,0.04); cursor: pointer; display: flex; align-items: center; gap: 16px;
-      transition: 0.3s;
-    }
-    .file-upload:hover { border-color: #7c5cfc; background: rgba(124,92,252,0.08); }
-    .file-upload i { font-size: 32px; color: #7c5cfc; }
-    .file-upload .file-info { font-size: 14px; color: #a0a0c0; }
-    .file-upload .file-info strong { color: #fff; }
-    .file-upload input[type="file"] { display: none; }
-    .btn-submit {
-      width: 100%; padding: 14px; background: linear-gradient(135deg, #7c5cfc, #f57c9a);
-      border: none; border-radius: 12px; color: #fff; font-size: 16px; font-weight: 600;
-      cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
-      box-shadow: 0 4px 20px rgba(124,92,252,0.25);
-    }
-    .btn-submit:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(124,92,252,0.4); }
-    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* Toast */
-    .toast {
-      position: fixed; bottom: 30px; right: 30px; padding: 16px 28px; border-radius: 14px;
-      font-size: 15px; font-weight: 500; z-index: 3000; transform: translateY(120px); opacity: 0;
-      transition: 0.4s; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    }
+    .toast { position: fixed; bottom: 30px; right: 30px; padding: 16px 28px; border-radius: 14px; font-size: 15px; font-weight: 500; z-index: 3000; transform: translateY(120px); opacity: 0; transition: 0.4s; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
     .toast.show { transform: translateY(0); opacity: 1; }
     .toast.success { background: #00b894; color: #fff; }
     .toast.error { background: #e17055; color: #fff; }
     .toast.info { background: #7c5cfc; color: #fff; }
-
-    @media (max-width: 768px) {
-      header { padding: 14px 20px; }
-      .hero { padding: 20px 20px 10px; }
-      .hero .featured { flex-direction: column; padding: 20px; }
-      .hero .featured .info h2 { font-size: 22px; }
-      .container { padding: 10px 20px 40px; }
-      .video-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-      .admin-panel { padding: 24px 20px; }
-      .admin-btn span { display: none; }
-    }
+    @media (max-width: 768px) { header { padding: 14px 20px; } .hero { padding: 20px 20px 10px; } .hero .featured { flex-direction: column; padding: 20px; } .hero .featured .info h2 { font-size: 22px; } .container { padding: 10px 20px 40px; } .video-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; } .admin-btn span { display: none; } }
   </style>
 </head>
 <body>
 
+<div id="telegramBanner">
+  <span><i class="fab fa-telegram-plane"></i> Join our Telegram Channel for updates: <a id="telegramLink" href="#" target="_blank">@your_channel</a></span>
+  <button class="close-banner" id="closeBannerBtn"><i class="fas fa-times"></i></button>
+</div>
+
 <header>
-  <div class="logo"><i class="fas fa-play-circle"></i> StreamZone</div>
+  <div class="logo"><i class="fas fa-play-circle"></i> DESI SHIT</div>
   <div class="header-actions">
     <span class="count-badge" id="videoCount"><i class="fas fa-film"></i> 0 videos</span>
-    <button class="admin-btn" id="openAdmin"><i class="fas fa-crown"></i> <span>Admin Panel</span></button>
+    <a href="/admin" class="admin-btn"><i class="fas fa-crown"></i> <span>Admin</span></a>
   </div>
 </header>
 
 <section class="hero" id="heroSection"></section>
-
 <div class="container">
-  <div class="grid-header">
-    <h2><i class="fas fa-th-large"></i> Latest Uploads</h2>
-  </div>
+  <div class="grid-header"><h2><i class="fas fa-th-large"></i> Latest Videos</h2></div>
   <div class="video-grid" id="videoGrid"></div>
-</div>
-
-<!-- Admin Modal -->
-<div class="admin-overlay" id="adminOverlay">
-  <div class="admin-panel">
-    <div class="panel-header">
-      <h2><i class="fas fa-crown"></i> Admin Panel</h2>
-      <button class="close-btn" id="closeAdmin"><i class="fas fa-times"></i></button>
-    </div>
-    <form id="uploadForm">
-      <div class="form-group">
-        <label>Video Title</label>
-        <input type="text" id="title" placeholder="Enter title..." required />
-      </div>
-      <div class="form-group">
-        <label>Caption</label>
-        <textarea id="caption" placeholder="Write a short caption..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>Video File</label>
-        <div class="file-upload" id="fileUploadArea">
-          <i class="fas fa-cloud-upload-alt"></i>
-          <div class="file-info">
-            <strong>Click to choose</strong> or drag &amp; drop<br />
-            <span id="fileStatus">MP4, WebM, MOV</span>
-          </div>
-          <input type="file" id="videoFile" accept="video/*" required />
-        </div>
-      </div>
-      <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-upload"></i> Upload Video</button>
-    </form>
-  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -232,60 +110,84 @@
 <script>
   (function() {
     const API_BASE = '/api/videos';
+    const CONFIG_API = '/api/config';
     const videoGrid = document.getElementById('videoGrid');
     const heroSection = document.getElementById('heroSection');
     const videoCount = document.getElementById('videoCount');
-    const openAdmin = document.getElementById('openAdmin');
-    const closeAdmin = document.getElementById('closeAdmin');
-    const adminOverlay = document.getElementById('adminOverlay');
-    const uploadForm = document.getElementById('uploadForm');
-    const title = document.getElementById('title');
-    const caption = document.getElementById('caption');
-    const videoFile = document.getElementById('videoFile');
-    const fileStatus = document.getElementById('fileStatus');
-    const submitBtn = document.getElementById('submitBtn');
     const toast = document.getElementById('toast');
-
+    const banner = document.getElementById('telegramBanner');
+    const closeBannerBtn = document.getElementById('closeBannerBtn');
+    const telegramLink = document.getElementById('telegramLink');
     let videos = [];
 
-    // ─── Toast ──────────────────────────────
-    function showToast(msg, type = 'info') {
-      toast.textContent = msg;
-      toast.className = 'toast ' + type + ' show';
-      clearTimeout(toast._t);
-      toast._t = setTimeout(() => toast.classList.remove('show'), 3500);
+    function showToast(msg, type='info') {
+      toast.textContent = msg; toast.className = 'toast ' + type + ' show';
+      clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
-    // ─── Fetch Videos ──────────────────────
+    async function loadConfig() {
+      try {
+        const res = await fetch(CONFIG_API);
+        const config = await res.json();
+        if (config.notificationEnabled) {
+          if (config.telegramLink) {
+            telegramLink.href = config.telegramLink;
+            if (config.telegramLink.startsWith('@')) {
+              telegramLink.href = 'https://t.me/' + config.telegramLink.substring(1);
+              telegramLink.textContent = config.telegramLink;
+            } else {
+              telegramLink.textContent = config.telegramLink;
+            }
+          }
+          const dismissed = localStorage.getItem('telegram_banner_dismissed');
+          if (config.permanentNotification) {
+            banner.style.display = 'flex';
+          } else {
+            if (dismissed !== 'true') {
+              banner.style.display = 'flex';
+            } else {
+              banner.style.display = 'none';
+            }
+          }
+        } else {
+          banner.style.display = 'none';
+        }
+      } catch (e) { console.warn('Config load error', e); }
+    }
+
+    closeBannerBtn.addEventListener('click', function() {
+      banner.style.display = 'none';
+      localStorage.setItem('telegram_banner_dismissed', 'true');
+    });
+
     async function loadVideos() {
       try {
         const res = await fetch(API_BASE);
         videos = await res.json();
         renderUI();
-      } catch (e) {
-        showToast('⚠️ Error loading videos', 'error');
-      }
+      } catch (e) { showToast('⚠️ Error loading videos', 'error'); }
     }
 
-    // ─── Render ─────────────────────────────
+    function escapeHtml(text) { if(!text) return ''; const d=document.createElement('div'); d.textContent=text; return d.innerHTML; }
+    function formatDate(ts) {
+      const d=new Date(ts); const now=new Date(); const diff=now-d;
+      if(diff<60000) return 'Just now';
+      if(diff<3600000) return Math.floor(diff/60000)+'m ago';
+      if(diff<86400000) return Math.floor(diff/3600000)+'h ago';
+      return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    }
+
     function renderUI() {
-      // Hero
-      if (videos.length === 0) {
-        heroSection.innerHTML = `
-          <div class="featured">
-            <div class="empty-hero">
-              <i class="fas fa-video"></i>
-              <h3>No videos yet</h3>
-              <p>Upload your first video from the Admin Panel</p>
-            </div>
-          </div>
-        `;
+      if(videos.length===0) {
+        heroSection.innerHTML = `<div class="featured"><div class="empty-hero"><i class="fas fa-video"></i><h3>No videos yet</h3><p>Upload your first video from Admin Panel</p></div></div>`;
       } else {
-        const latest = videos[0]; // already sorted by server
+        const latest = videos[0];
+        // Prefer telegramUrl, fallback to fileUrl
+        const src = latest.telegramUrl || latest.fileUrl || '';
         heroSection.innerHTML = `
           <div class="featured">
             <div class="thumb-container" onclick="openVideo('${latest.id}')">
-              <img src="${latest.fileUrl}" alt="${latest.title}" onerror="this.style.display='none'" />
+              <img src="${src}" alt="${latest.title}" onerror="this.style.display='none'" />
               <div class="play-icon"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="info">
@@ -297,30 +199,23 @@
         `;
       }
 
-      // Grid
-      if (videos.length === 0) {
-        videoGrid.innerHTML = `
-          <div class="empty-grid">
-            <i class="fas fa-film"></i>
-            <h3>No videos uploaded</h3>
-            <p>Upload from Admin Panel</p>
-          </div>
-        `;
+      if(videos.length===0) {
+        videoGrid.innerHTML = `<div class="empty-grid"><i class="fas fa-film"></i><h3>No videos uploaded</h3><p>Upload from Admin Panel</p></div>`;
       } else {
         let html = '';
         videos.forEach(v => {
+          const src = v.telegramUrl || v.fileUrl || '';
           html += `
             <div class="video-card" onclick="openVideo('${v.id}')">
               <div class="thumb">
-                <img src="${v.fileUrl}" alt="${v.title}" onerror="this.style.display='none'" />
+                <img src="${src}" alt="${v.title}" onerror="this.style.display='none'" />
                 <div class="overlay"><i class="fas fa-play"></i></div>
               </div>
               <div class="body">
                 <h3>${escapeHtml(v.title)}</h3>
                 <div class="caption">${escapeHtml(v.caption || '')}</div>
                 <div class="footer">
-                  <span><i class="far fa-clock"></i> ${formatDate(v.uploadedAt)}</span>
-                  <button class="del-btn" onclick="event.stopPropagation(); deleteVideo('${v.id}')"><i class="fas fa-trash"></i></button>
+                  <span class="date"><i class="far fa-eye"></i> ${v.views || 0} views • ${formatDate(v.uploadedAt)}</span>
                 </div>
               </div>
             </div>
@@ -331,129 +226,18 @@
       videoCount.textContent = videos.length + ' video' + (videos.length > 1 ? 's' : '');
     }
 
-    // ─── Helpers ─────────────────────────────
-    function escapeHtml(text) {
-      if (!text) return '';
-      const d = document.createElement('div');
-      d.textContent = text;
-      return d.innerHTML;
-    }
-    function formatDate(ts) {
-      const d = new Date(ts);
-      const now = new Date();
-      const diff = now - d;
-      if (diff < 60000) return 'Just now';
-      if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
-      if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
-      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    }
-
-    // ─── Open Video ─────────────────────────
     window.openVideo = function(id) {
       const v = videos.find(x => x.id === id);
-      if (v && v.fileUrl) {
-        window.open(v.fileUrl, '_blank');
-      } else {
-        showToast('Video not found', 'error');
-      }
+      if (v) {
+        const url = v.telegramUrl || v.fileUrl;
+        if (url) {
+          fetch('/api/videos/' + id + '/view', { method: 'POST' });
+          window.open(url, '_blank');
+        } else { showToast('Video not found', 'error'); }
+      } else { showToast('Video not found', 'error'); }
     };
 
-    // ─── Delete Video ──────────────────────
-    window.deleteVideo = async function(id) {
-      if (!confirm('Delete this video?')) return;
-      try {
-        const res = await fetch(API_BASE + '/' + id, { method: 'DELETE' });
-        if (res.ok) {
-          showToast('Video deleted', 'info');
-          loadVideos();
-        } else {
-          showToast('Delete failed', 'error');
-        }
-      } catch (e) {
-        showToast('Error deleting', 'error');
-      }
-    };
-
-    // ─── Admin Panel ────────────────────────
-    openAdmin.addEventListener('click', () => {
-      adminOverlay.classList.add('open');
-      uploadForm.reset();
-      fileStatus.textContent = 'MP4, WebM, MOV';
-    });
-    closeAdmin.addEventListener('click', () => adminOverlay.classList.remove('open'));
-    adminOverlay.addEventListener('click', (e) => {
-      if (e.target === adminOverlay) adminOverlay.classList.remove('open');
-    });
-
-    // File input
-    videoFile.addEventListener('change', () => {
-      const f = videoFile.files[0];
-      if (f) {
-        fileStatus.innerHTML = `<strong>${f.name}</strong> (${(f.size/1024/1024).toFixed(1)} MB)`;
-      } else {
-        fileStatus.textContent = 'MP4, WebM, MOV';
-      }
-    });
-
-    // Drag & Drop
-    document.getElementById('fileUploadArea').addEventListener('dragover', (e) => {
-      e.preventDefault();
-      document.getElementById('fileUploadArea').style.borderColor = '#7c5cfc';
-    });
-    document.getElementById('fileUploadArea').addEventListener('dragleave', () => {
-      document.getElementById('fileUploadArea').style.borderColor = 'rgba(255,255,255,0.08)';
-    });
-    document.getElementById('fileUploadArea').addEventListener('drop', (e) => {
-      e.preventDefault();
-      document.getElementById('fileUploadArea').style.borderColor = 'rgba(255,255,255,0.08)';
-      const files = e.dataTransfer.files;
-      if (files.length > 0 && files[0].type.startsWith('video/')) {
-        videoFile.files = files;
-        const f = files[0];
-        fileStatus.innerHTML = `<strong>${f.name}</strong> (${(f.size/1024/1024).toFixed(1)} MB)`;
-      }
-    });
-
-    // Upload
-    uploadForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const file = videoFile.files[0];
-      if (!file) { showToast('Please select a video', 'error'); return; }
-      const t = title.value.trim();
-      if (!t) { showToast('Please enter a title', 'error'); return; }
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-
-      const formData = new FormData();
-      formData.append('title', t);
-      formData.append('caption', caption.value.trim());
-      formData.append('video', file);
-
-      try {
-        const res = await fetch(API_BASE + '/upload', {
-          method: 'POST',
-          body: formData
-        });
-        if (res.ok) {
-          showToast('🎬 Uploaded successfully!', 'success');
-          adminOverlay.classList.remove('open');
-          uploadForm.reset();
-          fileStatus.textContent = 'MP4, WebM, MOV';
-          loadVideos();
-        } else {
-          const err = await res.json();
-          showToast(err.error || 'Upload failed', 'error');
-        }
-      } catch (e) {
-        showToast('Network error', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Video';
-      }
-    });
-
-    // ─── Init ──────────────────────────────
+    loadConfig();
     loadVideos();
   })();
 </script>
